@@ -291,15 +291,19 @@ assert.strictEqual(
 {
   const myError = new errors.Error('ERR_TLS_HANDSHAKE_TIMEOUT');
   assert.strictEqual(myError.code, 'ERR_TLS_HANDSHAKE_TIMEOUT');
+  assert.strictEqual(myError.hasOwnProperty('code'), false);
+  assert.strictEqual(myError.hasOwnProperty('name'), false);
+  assert.deepEqual(Object.keys(myError), []);
   const initialName = myError.name;
   myError.code = 'FHQWHGADS';
   assert.strictEqual(myError.code, 'FHQWHGADS');
   assert.strictEqual(myError.name, initialName);
+  assert.deepEqual(Object.keys(myError), ['code']);
   assert.ok(myError.name.includes('ERR_TLS_HANDSHAKE_TIMEOUT'));
   assert.ok(!myError.name.includes('FHQWHGADS'));
 }
 
-// Test that `name` and `message` are mutable and that changing them alters 
+// Test that `name` and `message` are mutable and that changing them alters
 // `toString()` but not `console.log()` results, which is the behavior of
 // `Error` objects in the browser.
 {
