@@ -1,4 +1,5 @@
 rules:
+  capitalized-comments: [error, always, {ignoreConsecutiveComments: true, ignorePattern: '\w+[\.\-]\w'}]
   no-restricted-syntax:
     # Config copied from .eslintrc.js
     - error
