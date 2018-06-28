@@ -22,7 +22,12 @@ function run({ command, expected }) {
   });
 
   r.write(`${command}\n`);
-  assert.strictEqual(accum, expected);
+
+  if (typeof expected === 'string')
+    assert.strictEqual(accum, expected);
+  else
+    assert.ok(expected.test(accum), `output in unexpected format:\n${accum}`);
+
   r.close();
 }
 
@@ -30,8 +35,7 @@ const tests = [
   {
     // test .load for a file that throws
     command: `.load ${fixtures.path('repl-pretty-stack.js')}`,
-    expected: 'Error: Whoops!\n    at repl:9:24\n    at d (repl:12:3)\n    ' +
-              'at c (repl:9:3)\n    at b (repl:6:3)\n    at a (repl:3:3)\n'
+    expected: /^Error: Whoops!\n    at repl:9:24\n    at d \(repl:12:3\)\n    at c \(repl:9:3\)\n    at b \(repl:6:3\)\n    at a \(repl:3:3\)\n/
   },
   {
     command: 'let x y;',
@@ -39,16 +43,16 @@ const tests = [
   },
   {
     command: 'throw new Error(\'Whoops!\')',
-    expected: 'Error: Whoops!\n'
+    expected: /^Error: Whoops!/
   },
   {
     command: 'foo = bar;',
-    expected: 'ReferenceError: bar is not defined\n'
+    expected: /^ReferenceError: bar is not defined\n/
   },
   // test anonymous IIFE
   {
     command: '(function() { throw new Error(\'Whoops!\'); })()',
-    expected: 'Error: Whoops!\n    at repl:1:21\n'
+    expected: /^Error: Whoops!\n    at repl:1:21\n/
   }
 ];
 
