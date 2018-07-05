@@ -1,4 +1,5 @@
 rules:
+  func-names: ['error', 'as-needed']
   no-restricted-syntax:
     # Config copied from .eslintrc.js
     - error
