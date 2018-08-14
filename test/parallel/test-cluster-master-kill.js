@@ -57,18 +57,23 @@ if (cluster.isWorker) {
   // get pid info
   let pid = null;
   master.once('message', (data) => {
+    console.error(`message received: ${require('util').inspect(data)}`);
+
     pid = data.pid;
   });
 
   // When master is dead
   let alive = true;
   master.on('exit', common.mustCall((code) => {
+    console.error(`exited with code ${code}`);
 
     // make sure that the master died on purpose
     assert.strictEqual(code, 0);
 
     // check worker process status
     const pollWorker = () => {
+      console.error('polling');
+
       alive = common.isAlive(pid);
       if (alive) {
         setTimeout(pollWorker, 50);

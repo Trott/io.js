@@ -88,6 +88,7 @@ if (cluster.isWorker) {
 
   // Handle messages from the cluster
   master.on('message', common.mustCall((data) => {
+    console.error(`message received: ${require('util').inspect(data)}`);
 
     // Add worker pid to list and progress tracker
     if (data.cmd === 'worker') {
@@ -97,11 +98,13 @@ if (cluster.isWorker) {
 
   // When cluster is dead
   master.on('exit', common.mustCall((code) => {
+    console.error(`exited with code ${code}`);
 
     // Check that the cluster died accidentally (non-zero exit code)
     masterExited = !!code;
 
     const pollWorkers = () => {
+      console.error('polling');
       // When master is dead all workers should be dead too
       let alive = false;
       workers.forEach((pid) => alive = common.isAlive(pid));
