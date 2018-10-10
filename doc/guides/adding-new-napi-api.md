@@ -1,24 +1,23 @@
 # Contributing a new API to N-API
 
-N-API is Node.js's next generation ABI-stable API for native modules.
-While improving the API surface is encouraged and welcomed, the following are
-a set of principles and guidelines to keep in mind while adding a new
-N-API API.
+N-API is Node.js's next generation ABI-stable API for native modules. The
+following are a set of principles and guidelines to keep in mind while adding a
+new N-API API.
 
 * A new API **must** adhere to N-API API shape and spirit.
     * **Must** be a C API.
     * **Must** not throw exceptions.
     * **Must** return `napi_status`.
     * **Should** consume `napi_env`.
-    * **Must** operate only on primitive data types, pointers to primitive
-      datatypes or opaque handles.
+    * **Must** operate only on primitive types, pointers to primitive types, or
+      opaque handles.
     * **Must** be a necessary API and not a nice to have. Convenience APIs
       belong in node-addon-api.
-    * **Must** not change the signature of an existing N-API API or break
-      ABI compatibility with other versions of Node.js.
+    * **Must** not change the signature of an existing N-API API.
+    * **Must** not break ABI compatibility with other versions of Node.js.
 * New API **should** be agnostic towards the underlying JavaScript VM.
 * New API PRs **must** have a corresponding documentation update.
-* New API PRs **must** be tagged as **n-api**.
+* New API PRs **must** have the `n-api` label applied.
 * There **must** be at least one test case showing how to use the API.
 * There **should** be at least one test case per interesting use of the API.
 * There **should** be a sample provided that operates in a realistic way
