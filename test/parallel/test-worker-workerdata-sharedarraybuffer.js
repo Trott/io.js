@@ -1,7 +1,10 @@
-// Flags: --expose-gc
 'use strict';
 
 const common = require('../common');
+if (!global.gc) {
+  common.relaunchWithFlags(['--expose-gc']);
+}
+
 const assert = require('assert');
 const { Worker } = require('worker_threads');
 
