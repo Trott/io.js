@@ -1,5 +1,6 @@
 'use strict';
-require('../common');
+const common = require('../common');
+common.experimentalWorker();
 const { Worker, MessageChannel } = require('worker_threads');
 
 // Check the interaction of calling .terminate() while transferring

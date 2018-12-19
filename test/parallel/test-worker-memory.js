@@ -1,5 +1,7 @@
 'use strict';
 const common = require('../common');
+common.experimentalWorker();
+
 const assert = require('assert');
 const util = require('util');
 const { Worker } = require('worker_threads');

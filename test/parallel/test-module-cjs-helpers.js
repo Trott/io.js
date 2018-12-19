@@ -2,7 +2,8 @@
 
 const common = require('../common');
 
-common.exposeInternals();
+if (!process.execArgv.includes('--experimental-worker'))
+  common.relaunchWithFlags(['--experimental-worker', '--expose-internals']);
 
 const assert = require('assert');
 const { builtinLibs } = require('internal/modules/cjs/helpers');

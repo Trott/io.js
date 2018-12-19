@@ -46,6 +46,7 @@ const {
   disableCrashOnUnhandledRejection,
   getTTYfd,
   runWithInvalidFD,
+  experimentalWorker,
   exposeInternals,
   relaunchWithFlags
 } = common;
@@ -94,6 +95,7 @@ export {
   disableCrashOnUnhandledRejection,
   getTTYfd,
   runWithInvalidFD,
+  experimentalWorker,
   exposeInternals,
   relaunchWithFlags
 };

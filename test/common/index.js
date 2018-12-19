@@ -736,6 +736,12 @@ function exposeInternals() {
   }
 }
 
+function experimentalWorker() {
+  if (!require('module').builtinModules.includes('worker_threads')) {
+    relaunchWithFlags(['--experimental-worker']);
+  }
+}
+
 module.exports = {
   allowGlobals,
   buildType,
@@ -748,6 +754,7 @@ module.exports = {
   enoughTestMem,
   expectsError,
   expectWarning,
+  experimentalWorker,
   exposeInternals,
   getArrayBufferViews,
   getBufferSources,

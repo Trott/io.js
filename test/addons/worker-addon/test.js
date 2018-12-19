@@ -1,5 +1,6 @@
 'use strict';
 const common = require('../../common');
+common.experimentalWorker();
 const assert = require('assert');
 const child_process = require('child_process');
 const path = require('path');

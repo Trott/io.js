@@ -1,9 +1,11 @@
 'use strict';
 
 const common = require('../common');
-const { Worker } = require('worker_threads');
 
 common.skipIfInspectorDisabled();
+
+common.experimentalWorker();
+const { Worker } = require('worker_threads');
 
 if (!process.env.HAS_STARTED_WORKER) {
   process.env.HAS_STARTED_WORKER = 1;
