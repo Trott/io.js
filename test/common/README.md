@@ -343,6 +343,11 @@ const { spawn } = require('child_process');
 spawn(...common.pwdCommand, { stdio: ['pipe'] });
 ```
 
+### relaunchWithFlags(flags)
+* [&lt;array>] Command-line flags as an array of strings
+
+Relaunches the test adding the specified command-line flags.
+
 ### rootDir
 * [&lt;string>]
 
