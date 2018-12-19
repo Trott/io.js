@@ -1,7 +1,9 @@
 'use strict';
-// Flags: --expose-internals
 
-require('../common');
+const common = require('../common');
+
+common.exposeInternals();
+
 const assert = require('assert');
 const { builtinLibs } = require('internal/modules/cjs/helpers');
 

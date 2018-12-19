@@ -1,10 +1,11 @@
-// Flags: --expose-internals
-
 'use strict';
+const common = require('../common');
+common.exposeInternals();
 
 const { internalBinding } = require('internal/test/binding');
-const common = require('../common');
+
 const fixtures = require('../common/fixtures');
+
 const assert = require('assert');
 const v8 = require('v8');
 const os = require('os');

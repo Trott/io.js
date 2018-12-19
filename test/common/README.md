@@ -155,6 +155,11 @@ expectWarning({
 });
 ```
 
+### exposeInternals()
+
+Checks if internals are available. If not, it will invoke the test file with
+`--expose-internals` and exit.
+
 ### getArrayBufferViews(buf)
 * `buf` [&lt;Buffer>]
 * return [&lt;ArrayBufferView&#91;&#93;>]
