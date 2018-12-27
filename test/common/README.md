@@ -155,11 +155,6 @@ expectWarning({
 });
 ```
 
-### experimentalWorker()
-
-Checks if `worker_threads` are available. If not, it will invoke the test file
-with `--experimental-worker` and exit.
-
 ### getArrayBufferViews(buf)
 * `buf` [&lt;Buffer>]
 * return [&lt;ArrayBufferView&#91;&#93;>]

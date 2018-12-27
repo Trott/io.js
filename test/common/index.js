@@ -683,6 +683,15 @@ function requireFlags(flags) {
     flags = [flags];
   }
   const missing = flags.filter((flag) => !process.execArgv.includes(flag));
+
+  // Special handling for worker_threads. Can be removed once worker_threads
+  // are no longer behind a flag.
+  if (missing.some((flag) => /--experimental[-_]worker/.test(flag))) {
+    if (require('module').builtinModules.includes('worker_threads')) {
+      return;
+    }
+  }
+
   if (missing.length > 0) {
     relaunchWithFlags(missing);
   }
@@ -693,12 +702,6 @@ function relaunchWithFlags(flags) {
   const options = { encoding: 'utf8', stdio: 'inherit' };
   const result = spawnSync(process.execPath, args, options);
   process.exit(result.status);
-}
-
-function experimentalWorker() {
-  if (!require('module').builtinModules.includes('worker_threads')) {
-    relaunchWithFlags(['--experimental-worker']);
-  }
 }
 
 module.exports = {
@@ -713,7 +716,6 @@ module.exports = {
   enoughTestMem,
   expectsError,
   expectWarning,
-  experimentalWorker,
   getArrayBufferViews,
   getBufferSources,
   getCallSite,
