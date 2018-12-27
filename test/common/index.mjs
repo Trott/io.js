@@ -44,9 +44,8 @@ const {
   getArrayBufferViews,
   getBufferSources,
   getTTYfd,
-  runWithInvalidFD,
-  relaunchWithFlags,
-  requireFlags
+  requireFlags,
+  runWithInvalidFD
 } = common;
 
 export {
@@ -92,7 +91,6 @@ export {
   getArrayBufferViews,
   getBufferSources,
   getTTYfd,
-  runWithInvalidFD,
-  relaunchWithFlags,
-  requireFlags
+  requireFlags,
+  runWithInvalidFD
 };
