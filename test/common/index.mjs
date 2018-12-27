@@ -43,10 +43,9 @@ const {
   getArrayBufferViews,
   getBufferSources,
   disableCrashOnUnhandledRejection,
+  experimentalWorker,
   getTTYfd,
   runWithInvalidFD,
-  experimentalWorker,
-  exposeInternals,
   relaunchWithFlags,
   requireFlags
 } = common;
@@ -93,10 +92,9 @@ export {
   getArrayBufferViews,
   getBufferSources,
   disableCrashOnUnhandledRejection,
+  experimentalWorker,
   getTTYfd,
   runWithInvalidFD,
-  experimentalWorker,
-  exposeInternals,
   relaunchWithFlags,
   requireFlags
 };
