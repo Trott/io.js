@@ -338,7 +338,7 @@ function _mustCallInner(fn, criteria = 1, field) {
 }
 
 function hasMultiLocalhost() {
-  requireFlags(['--expose-internals']);
+  requireFlags('--expose-internals');
   const { internalBinding } = require('internal/test/binding');
   const { TCP, constants: TCPConstants } = internalBinding('tcp_wrap');
   const t = new TCP(TCPConstants.SOCKET);
@@ -678,10 +678,7 @@ function runWithInvalidFD(func) {
   printSkipMessage('Could not generate an invalid fd');
 }
 
-function requireFlags(flags) {
-  if (!(flags instanceof Array)) {
-    flags = [flags];
-  }
+function requireFlags(...flags) {
   let missing = flags.filter((flag) => !process.execArgv.includes(flag));
 
   // Special handling for worker_threads. Can be removed once worker_threads
