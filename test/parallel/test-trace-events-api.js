@@ -5,7 +5,9 @@ const common = require('../common');
 
 if (!process.binding('config').hasTracing)
   common.skip('missing trace events');
-common.skipIfWorker(); // https://github.com/nodejs/node/issues/22767
+// https://github.com/nodejs/node/issues/22767
+if (!require('worker_threads').isMainThread)
+  common.skip('This test only works on a main thread');
 
 const assert = require('assert');
 const cp = require('child_process');

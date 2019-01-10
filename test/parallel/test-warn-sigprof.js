@@ -10,7 +10,9 @@ common.skipIfInspectorDisabled();
 if (common.isWindows)
   common.skip('test does not apply to Windows');
 
-common.skipIfWorker(); // Worker inspector never has a server running
+// Worker inspector never has a server running
+if (!require('worker_threads').isMainThread)
+  common.skip('This test only works on a main thread');
 
 common.expectWarning('Warning',
                      'process.on(SIGPROF) is reserved while debugging',

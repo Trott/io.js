@@ -648,12 +648,6 @@ function skipIf32Bits() {
   }
 }
 
-function skipIfWorker() {
-  if (!isMainThread) {
-    skip('This test only works on a main thread');
-  }
-}
-
 function getArrayBufferViews(buf) {
   const { buffer, byteOffset, byteLength } = buf;
 
@@ -769,7 +763,6 @@ module.exports = {
   skipIf32Bits,
   skipIfEslintMissing,
   skipIfInspectorDisabled,
-  skipIfWorker,
 
   get localhostIPv6() { return '::1'; },
 

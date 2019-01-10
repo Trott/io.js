@@ -3,7 +3,9 @@
 const common = require('../common');
 
 common.skipIfInspectorDisabled();
-common.skipIfWorker(); // https://github.com/nodejs/node/issues/22767
+// https://github.com/nodejs/node/issues/22767
+if (!require('worker_threads').isMainThread)
+  common.skip('This test only works on a main thread');
 
 const assert = require('assert');
 const { Session } = require('inspector');
