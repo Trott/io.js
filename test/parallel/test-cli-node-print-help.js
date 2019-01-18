@@ -1,7 +1,7 @@
-// Flags: --expose-internals
 'use strict';
 
 const common = require('../common');
+common.requireFlags('--expose-internals');
 
 // The following tests assert that the node.cc PrintHelp() function
 // returns the proper set of cli options when invoked

@@ -1,8 +1,7 @@
 'use strict';
 
-// Flags: --expose-internals
-
-require('../common');
+const common = require('../common');
+common.requireFlags('--expose-internals');
 const { WPTRunner } = require('../common/wpt');
 const runner = new WPTRunner('encoding');
 

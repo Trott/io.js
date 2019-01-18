@@ -1,6 +1,5 @@
 'use strict';
 
-// Flags: --expose-internals
 // This verifies that
 // 1. We do not leak internal modules unless the --require-internals option
 //    is on.
@@ -8,6 +7,7 @@
 // 3. Deprecated modules are properly deprecated.
 
 const common = require('../common');
+common.requireFlags('--expose-internals');
 
 if (!common.isMainThread) {
   common.skip('Cannot test the existence of --expose-internals from worker');
