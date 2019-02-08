@@ -1,4 +1,13 @@
 rules:
+
+  comma-dangle:
+    - error
+    - arrays: 'always-multiline'
+      objects: 'only-multiline'
+      imports: 'only-multiline'
+      exports: 'only-multiline'
+  prefer-arrow-callback: error
+
   prefer-object-spread: error
   no-buffer-constructor: error
   no-restricted-syntax:
