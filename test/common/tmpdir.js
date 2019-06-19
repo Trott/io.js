@@ -1,7 +1,7 @@
 /* eslint-disable node-core/require-common-first, node-core/required-modules */
 'use strict';
 
-const { execSync } = require('child_process');
+const { spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const { debuglog } = require('util');
@@ -28,7 +28,7 @@ function rimrafSync(pathname, { spawn = true } = {}) {
   if (spawn && process.platform === 'win32' && st.isDirectory()) {
     try {
       // Try `rmdir` first.
-      execSync(`rmdir /q /s ${pathname}`, { timout: 1000 });
+      spawnSync('rmdir', ['/q', '/s', pathname], { timout: 1000 });
     } catch (e) {
       // Attempt failed. Log and carry on.
       debug(e);
