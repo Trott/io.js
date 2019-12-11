@@ -23,10 +23,20 @@ server.listen(0, common.mustCall(() => {
   const client = http2.connect(`http://localhost:${server.address().port}`,
                                { settings: { initialWindowSize: 6553500 } });
   const request = client.request({ ':method': 'POST' });
+  let waitForDrain = false;
   function writeChunk() {
+    if (waitForDrain) {
+      return;
+    }
     if (remaining > 0) {
       remaining -= chunkLength;
-      request.write(chunk, writeChunk);
+      waitForDrain = !(request.write(chunk, writeChunk));
+      if (waitForDrain) {
+        request.once('drain', () => {
+          waitForDrain = false;
+          writeChunk();
+        });
+      }
     } else {
       request.end();
     }
