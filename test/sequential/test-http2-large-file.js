@@ -48,3 +48,8 @@ server.listen(0, common.mustCall(() => {
   }));
   request.resume();
 }));
+
+server.on('close', () => console.log('close'));
+server.on('aborted', () => console.log('aborted'));
+server.on('error', (e) => { console.log('error'); throw e; });
+server.on('frameError', (e) => console.log('frameError', e));
