@@ -73,6 +73,7 @@ if (process.argv[2] === 'child') {
     // have been recorded.
     // When running locally on x64 Linux, this number is usually at least 200
     // for both threads, so 15 seems like a very safe threshold.
-    assert(ticks >= 15, `${ticks} >= 15`);
+    const minTicks = 15;
+    assert(ticks >= minTicks, `${ticks} >= ${minTicks}`);
   }
 }

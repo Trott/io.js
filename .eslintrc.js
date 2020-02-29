@@ -139,6 +139,7 @@ module.exports = {
     'no-invalid-regexp': 'error',
     'no-irregular-whitespace': 'error',
     'no-lonely-if': 'error',
+    'no-magic-numbers': ['error', { ignore: [0, 1, 2, 42, 1000, 1024], ignoreArrayIndexes: true }],
     'no-misleading-character-class': 'error',
     'no-mixed-requires': 'error',
     'no-mixed-spaces-and-tabs': 'error',

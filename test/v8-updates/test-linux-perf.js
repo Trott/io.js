@@ -31,7 +31,7 @@ const repeat = 5;
 
 // Expected number of samples we'll capture per repeat
 const sampleCount = 10;
-const sleepTime = sampleCount * (1.0 / frequency);
+const sleepTime = sampleCount / frequency;
 
 const perfFlags = [
   'record',
