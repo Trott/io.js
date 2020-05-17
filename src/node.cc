@@ -251,6 +251,7 @@ static void AtomicsWaitCallback(Isolate::AtomicsWaitEvent event,
       break;
     ATOMIC_WAIT_EVENTS(V)
 #undef V
+    default: UNREACHABLE();
   }
 
   fprintf(stderr,
