@@ -12,6 +12,15 @@ const { Worker, parentPort } = require('worker_threads');
 // This test uses separate threads for client and server to avoid
 // the two event loops intermixing, as we are writing in a busy loop here.
 
+let started = 0;
+let workered = 0;
+let wrotefncalls = 0;
+let errored = 0;
+const timer = setTimeout(() => {
+  console.log(started, workered, wrotefncalls, errored);
+  require('assert').fail('timed out'); 
+}, 2000);
+timer.unref();
 if (process.env.HAS_STARTED_WORKER) {
   const server = http2.createServer({ maxSessionInvalidFrames: 100 });
   server.on('stream', (stream) => {
@@ -26,9 +35,9 @@ if (process.env.HAS_STARTED_WORKER) {
 }
 
 process.env.HAS_STARTED_WORKER = 1;
-console.log(`Starting worker at ${new Date().toLocaleString()}.`)
+started++;
 const worker = new Worker(__filename).on('message', common.mustCall((port) => {
-  console.log(`Worker started at ${new Date().toLocaleString()}.`);
+  workered++;
   const h2header = Buffer.alloc(9);
   const conn = net.connect(port);
 
@@ -67,7 +76,7 @@ const worker = new Worker(__filename).on('message', common.mustCall((port) => {
     if (gotError)
       return;
 
-    console.log(`Trying writeRequests at ${new Date().toLocaleString()}.`);
+    wrotefncalls++;
 
     for (let i = 1; i < 10 && !gotError; i++) {
       h2header[3] = 1;  // HEADERS
@@ -85,7 +94,7 @@ const worker = new Worker(__filename).on('message', common.mustCall((port) => {
   }
 
   conn.once('error', common.mustCall(() => {
-    console.log(`Expected error received at ${new Date().toLocaleString()}.`);
+    errored++;
     gotError = true;
     worker.terminate();
     conn.destroy();
