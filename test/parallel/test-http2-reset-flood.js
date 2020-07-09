@@ -62,6 +62,11 @@ const worker = new Worker(__filename).on('message', common.mustCall((port) => {
   let streamId = 1;
 
   function writeRequests() {
+    if (gotError)
+      return;
+      
+    console.log(`Trying writeRequests at ${new Date().toLocaleString()}.`);
+
     for (let i = 1; i < 10 && !gotError; i++) {
       h2header[3] = 1;  // HEADERS
       h2header[4] = 0x5;  // END_HEADERS|END_STREAM
@@ -78,6 +83,7 @@ const worker = new Worker(__filename).on('message', common.mustCall((port) => {
   }
 
   conn.once('error', common.mustCall(() => {
+    console.log(`Expected error received at ${new Date().toLocaleString()}.`);
     gotError = true;
     worker.terminate();
     conn.destroy();
