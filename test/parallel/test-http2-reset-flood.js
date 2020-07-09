@@ -26,7 +26,9 @@ if (process.env.HAS_STARTED_WORKER) {
 }
 
 process.env.HAS_STARTED_WORKER = 1;
+console.log(`Starting worker at ${new Date().toLocaleString()}.`)
 const worker = new Worker(__filename).on('message', common.mustCall((port) => {
+  console.log(`Worker started at ${new Date().toLocaleString()}.`);
   const h2header = Buffer.alloc(9);
   const conn = net.connect(port);
 
@@ -64,7 +66,7 @@ const worker = new Worker(__filename).on('message', common.mustCall((port) => {
   function writeRequests() {
     if (gotError)
       return;
-      
+
     console.log(`Trying writeRequests at ${new Date().toLocaleString()}.`);
 
     for (let i = 1; i < 10 && !gotError; i++) {
