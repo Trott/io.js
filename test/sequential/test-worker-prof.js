@@ -33,6 +33,7 @@ if (process.argv[2] === 'child') {
   const { Worker } = require('worker_threads');
   const w = new Worker(pingpong, { eval: true });
   w.on('message', (m) => {
+    console.log('message received');
     w.postMessage(process.execPath);
   });
 
