@@ -23,8 +23,10 @@ if (process.argv[2] === 'child') {
   const fs = require('fs');
   const { Worker, parentPort  } = require('worker_threads');
   parentPort.on('message', (m) => {
-    if (counter++ === 10)
+    if (counter++ === 10) {
+      console.log('exiting thread');
       process.exit(0);
+    }
     parentPort.postMessage(
       fs.readFileSync(m.toString()).slice(0, 1024 * 1024));
   });
@@ -33,18 +35,21 @@ if (process.argv[2] === 'child') {
   const { Worker } = require('worker_threads');
   const w = new Worker(pingpong, { eval: true });
   w.on('message', (m) => {
-    console.log('message received');
     w.postMessage(process.execPath);
   });
 
   w.on('exit', common.mustCall(() => {
+    console.log('exit event received');
     files = fs.readdirSync(tmpdir.path);
+    console.log('files read', files);
     const wlog = files.filter((name) => /\.log$/.test(name) && name !== plog)[0];
+    console.log('files filtered', wlog);
     if (wlog === undefined) {
       console.error('`--prof` did not produce a profile log' +
                     ' for worker thread!');
       process.exit(1);
     }
+    console.log('exiting main thread');
     process.exit(0);
   }));
   w.postMessage(process.execPath);
@@ -53,6 +58,7 @@ if (process.argv[2] === 'child') {
   const spawnResult = spawnSync(
     process.execPath, ['--prof', __filename, 'child'],
     { cwd: tmpdir.path, encoding: 'utf8', timeout: 30_000 });
+  console.log(spawnResult);
   assert.strictEqual(spawnResult.stderr.toString(), '',
                      `child exited with an error: \
                      ${util.inspect(spawnResult)}`);
