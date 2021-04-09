@@ -1,0 +1,32 @@
+'use strict';
+const common = require('../common');
+
+common.skipIfInspectorDisabled();
+
+const fixtures = require('../common/fixtures');
+const startCLI = require('../common/inspector-cli');
+
+const assert = require('assert');
+const path = require('path');
+
+// Auto-resume on start if the environment variable is defined.
+{
+  const scriptFullPath = fixtures.path('inspector-cli', 'break.js');
+  const script = path.relative(process.cwd(), scriptFullPath);
+
+  const cli = startCLI([script], [], {
+    env: { NODE_INSPECT_RESUME_ON_START: '1' }
+  });
+
+  cli.waitForInitialBreak()
+    .then(() => {
+      assert.deepStrictEqual(
+        cli.breakInfo,
+        { filename: script, line: 10 },
+      );
+    })
+    .then(() => cli.quit())
+    .then((code) => {
+      assert.strictEqual(code, 0);
+    });
+}
