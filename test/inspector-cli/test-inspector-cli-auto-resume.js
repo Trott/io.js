@@ -17,9 +17,10 @@ addLibraryPath(process.env);
   const scriptFullPath = fixtures.path('inspector-cli', 'break.js');
   const script = path.relative(process.cwd(), scriptFullPath);
 
-  const cli = startCLI([script], [], {
-    env: { NODE_INSPECT_RESUME_ON_START: '1' }
-  });
+  const env = { ...process.env };
+  env.NODE_INSPECT_RESUME_ON_START = '1';
+
+  const cli = startCLI([script], [], { env });
 
   cli.waitForInitialBreak()
     .then(() => {
