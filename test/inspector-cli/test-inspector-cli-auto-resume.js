@@ -5,9 +5,12 @@ common.skipIfInspectorDisabled();
 
 const fixtures = require('../common/fixtures');
 const startCLI = require('../common/inspector-cli');
+const { addLibraryPath } = require('../common/shared-lib-util');
 
 const assert = require('assert');
 const path = require('path');
+
+addLibraryPath(process.env);
 
 // Auto-resume on start if the environment variable is defined.
 {
