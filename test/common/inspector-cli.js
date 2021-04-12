@@ -27,7 +27,7 @@ function startCLI(args, flags = [], spawnOpts = {}) {
   }
 
   function getOutput() {
-    return outputBuffer.join('\n').replaceAll('\b', '');
+    return outputBuffer.join('\n').replace(/[\b]/g, '');
   }
 
   child.stdout.setEncoding('utf8');
