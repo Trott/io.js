@@ -5,7 +5,12 @@
 // and the cache is used when built in modules are compiled.
 // Otherwise, verifies that no cache is used when compiling builtins.
 
-const { isMainThread } = require('../common');
+const common = require('../common');
+
+if (!common.hasCrypto) {
+  common.skip('missing crypto');
+}
+
 const assert = require('assert');
 const {
   internalBinding
@@ -39,7 +44,7 @@ if (!process.features.cached_builtins) {
   console.log('The binary is not configured with code cache');
   assert(!process.config.variables.node_use_node_code_cache);
 
-  if (isMainThread) {
+  if (common.isMainThread) {
     assert.deepStrictEqual(compiledWithCache, new Set());
     for (const key of loadedModules) {
       assert(compiledWithoutCache.has(key),
@@ -54,7 +59,7 @@ if (!process.features.cached_builtins) {
 } else {  // Native compiled
   assert(process.config.variables.node_use_node_code_cache);
 
-  if (!isMainThread) {
+  if (!common.isMainThread) {
     for (const key of [ 'internal/bootstrap/pre_execution' ]) {
       canBeRequired.add(key);
       cannotBeRequired.delete(key);
