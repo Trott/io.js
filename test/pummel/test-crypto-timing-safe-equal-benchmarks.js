@@ -20,7 +20,7 @@ function runOneBenchmark(compareFunc, firstBufFill, secondBufFill, bufSize) {
 
       // Ensure that the result of the function call gets used, so it doesn't
       // get discarded due to engine optimizations.
-      assert.strictEqual(result, firstBufFill === secondBufFill);
+      assert.notStrictEqual(result, 'fhqwhgads');
 
       endTime[0] * 1e9 + endTime[1];
     `);
