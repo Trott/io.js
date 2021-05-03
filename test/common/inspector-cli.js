@@ -7,7 +7,7 @@ const BREAK_MESSAGE = new RegExp('(?:' + [
   'exception', 'other', 'promiseRejection',
 ].join('|') + ') in', 'i');
 
-const TIMEOUT = common.platformTimeout(5000);
+const TIMEOUT = common.platformTimeout(10000);
 
 function isPreBreak(output) {
   return /Break on start/.test(output) && /1 \(function \(exports/.test(output);
