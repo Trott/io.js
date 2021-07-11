@@ -25,7 +25,6 @@ See [details on our policy on Code of Conduct](./doc/guides/contributing/code-of
 * [Dependencies](./doc/guides/contributing/pull-requests.md#dependencies)
 * [Setting up your local environment](./doc/guides/contributing/pull-requests.md#setting-up-your-local-environment)
 * [The Process of Making Changes](./doc/guides/contributing/pull-requests.md#the-process-of-making-changes)
-* [Reviewing Pull Requests](./doc/guides/contributing/pull-requests.md#reviewing-pull-requests)
 * [Notes](./doc/guides/contributing/pull-requests.md#notes)
 
 <a id="developers-certificate-of-origin"></a>
