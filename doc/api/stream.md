@@ -1033,10 +1033,11 @@ available, [`stream.read()`][stream-read] will return that data.
 const readable = getReadableStreamSomehow();
 readable.on('readable', function() {
   // There is some data to read now.
-  let data;
+  let data = this.read();
 
-  while (data = this.read()) {
+  while (data) {
     console.log(data);
+    data = this.read();
   }
 });
 ```

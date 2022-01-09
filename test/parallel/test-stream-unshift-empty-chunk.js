@@ -40,8 +40,8 @@ r._read = function(n) {
 let readAll = false;
 const seen = [];
 r.on('readable', () => {
-  let chunk;
-  while (chunk = r.read()) {
+  let chunk = r.read();
+  while (chunk) {
     seen.push(chunk.toString());
     // Simulate only reading a certain amount of the data,
     // and then putting the rest of the chunk back into the
@@ -51,6 +51,7 @@ r.on('readable', () => {
     const putBack = Buffer.alloc(readAll ? 0 : 5, 'y');
     readAll = !readAll;
     r.unshift(putBack);
+    chunk = r.read();
   }
 });
 

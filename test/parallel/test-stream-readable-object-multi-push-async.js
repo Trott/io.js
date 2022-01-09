@@ -45,10 +45,11 @@ const BATCH = 10;
   }
 
   readable.on('readable', () => {
-    let data;
     console.log('readable emitted');
-    while (data = readable.read()) {
+    let data = readable.read();
+    while (data) {
       console.log(data);
+      data = readable.read();
     }
   });
 

@@ -177,6 +177,7 @@ module.exports = {
     'no-async-promise-executor': 'error',
     'no-case-declarations': 'error',
     'no-class-assign': 'error',
+    'no-cond-assign': 'error',
     'no-confusing-arrow': 'error',
     'no-const-assign': 'error',
     'no-constructor-return': 'error',
