@@ -216,6 +216,7 @@ module.exports = {
     'no-octal': 'error',
     'no-path-concat': 'error',
     'no-proto': 'error',
+    'no-prototype-builtins': 'error',
     'no-redeclare': ['error', { 'builtinGlobals': false }],
     'no-regex-spaces': 'error',
     'no-restricted-modules': ['error', 'sys'],

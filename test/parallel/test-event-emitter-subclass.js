@@ -36,6 +36,9 @@ function MyEE(cb) {
 
 const myee = new MyEE(common.mustCall());
 
+// What is the purpose of the hasOwnProperty() call? Is it necessary? A comment
+// explaining it would be helpful.
+// eslint-disable-next-line no-prototype-builtins
 myee.hasOwnProperty('usingDomains');
 
 Object.setPrototypeOf(ErrorEE.prototype, EventEmitter.prototype);

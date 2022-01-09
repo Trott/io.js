@@ -14,7 +14,7 @@ const expectedForProperty = {
 assert.deepStrictEqual(testNull.setProperty(), expectedForProperty);
 assert.deepStrictEqual(testNull.getProperty(), expectedForProperty);
 assert.deepStrictEqual(testNull.hasProperty(), expectedForProperty);
-assert.deepStrictEqual(testNull.hasOwnProperty(), expectedForProperty);
+assert.deepStrictEqual(Object.hasOwn(testNull, expectedForProperty));
 // It's OK not to want the result of a deletion.
 assert.deepStrictEqual(testNull.deleteProperty(),
                        Object.assign({},

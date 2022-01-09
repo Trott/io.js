@@ -150,8 +150,11 @@ function teardown() {
 
 // Check that the kGroupIndent symbol property is not enumerable
 {
+  const propertyIsEnumerable = (obj, prop) => {
+    return Object.prototype.propertyIsEnumerable.call(obj, prop);
+  };
   const keys = Reflect.ownKeys(console)
-                      .filter((val) => console.propertyIsEnumerable(val))
+                      .filter((val) => propertyIsEnumerable(console, val))
                       .map((val) => val.toString());
   assert(!keys.includes('Symbol(groupIndent)'),
          'groupIndent should not be enumerable');

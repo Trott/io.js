@@ -13,9 +13,14 @@ const assert = require('assert');
 const { internalBinding } = require('internal/test/binding');
 const TTY = internalBinding('tty_wrap').TTY;
 
+function propertyIsEnumerable(obj, prop) {
+  return Object.prototype.propertyIsEnumerable.call(obj, prop);
+}
+
 {
-  assert.strictEqual(TTY.prototype.propertyIsEnumerable('bytesRead'), false);
-  assert.strictEqual(TTY.prototype.propertyIsEnumerable('fd'), false);
+  assert.strictEqual(propertyIsEnumerable(TTY.prototype, 'bytesRead'), false);
+  assert.strictEqual(propertyIsEnumerable(TTY.prototype, 'fd'), false);
   assert.strictEqual(
-    TTY.prototype.propertyIsEnumerable('_externalStream'), false);
+    propertyIsEnumerable(TTY.prototype, '_externalStream'), false
+  );
 }
