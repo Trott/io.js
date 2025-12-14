@@ -16,7 +16,8 @@ rsync -a --delete "$TMP_DIR"/source-map-tests-"$SHA"/ "$TARGET_DIR"/
 
 rm -rf "$TMP_DIR"
 
-sed -i.bak "s#https://github.com/tc39/source-map-tests/commit/[0-9a-f]*#https://github.com/tc39/source-map-tests/commit/$SHA#" "$README"
-rm "$README.bak"
+TMP_FILE=$(mktemp)
+sed "s#https://github.com/tc39/source-map-tests/commit/[0-9a-f]*#https://github.com/tc39/source-map-tests/commit/$SHA#" "$README" > "$TMP_FILE"
+mv "$TMP_FILE" "$README"
 
 echo "test426 fixtures updated to $SHA."
