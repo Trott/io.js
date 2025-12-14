@@ -12,7 +12,8 @@ SHA=$(basename "$TARBALL_URL")
 TMP_DIR="$(mktemp -d)"
 curl -f "$TARBALL_URL" | tar -xzf - -C "$TMP_DIR"
 
-rsync -a --delete "$TMP_DIR"/source-map-tests-"$SHA"/ "$TARGET_DIR"/
+rm -rf "$TARGET_DIR"
+curl -f "$TARBALL_URL" | tar -xz --strip-components 1 -C "$TARGET_DIR"
 
 rm -rf "$TMP_DIR"
 
