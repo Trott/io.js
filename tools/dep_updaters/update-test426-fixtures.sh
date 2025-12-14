@@ -10,7 +10,6 @@ TARBALL_URL=$(curl -fsIo /dev/null -w '%header{Location}' https://github.com/tc3
 SHA=$(basename "$TARBALL_URL")
 
 TMP_DIR="$(mktemp -d)"
-curl -f "$TARBALL_URL" | tar -xzf - -C "$TMP_DIR"
 
 rm -rf "$TARGET_DIR"
 mkdir "$TARGET_DIR"
