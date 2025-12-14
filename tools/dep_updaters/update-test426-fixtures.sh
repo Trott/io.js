@@ -2,8 +2,10 @@
 
 set -e
 
-TARGET_DIR="$(dirname "$0")/../../test/fixtures/test426"
-README="$(dirname "$0")/../../test/test426/README.md"
+BASE_DIR=$(cd "$(dirname "$0")/../.." && pwd)
+
+TARGET_DIR="$BASE_DIR/test/fixtures/test426"
+README="$BASE_DIR/test/test426/README.md"
 TARBALL_URL=$(curl -fsIo /dev/null -w '%header{Location}' https://github.com/tc39/source-map-tests/archive/HEAD.tar.gz)
 SHA=$(basename "$TARBALL_URL")
 
